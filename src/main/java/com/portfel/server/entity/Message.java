@@ -1,0 +1,37 @@
+package com.portfel.server.entity;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "message")
+public class Message {
+
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment",strategy = "increment")
+    private int id;
+
+    @Column(name = "value",nullable = false)
+    private String value;
+
+    @Column(name = "date",nullable = false)
+    private Date date;
+
+    public Message() {
+    }
+
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
+
+    public String getValue() {return value;}
+
+    public void setValue(String value) {this.value = value;}
+
+    public Date getDate() {return date;}
+
+    public void setDate(Date date) {this.date = date;}
+}
