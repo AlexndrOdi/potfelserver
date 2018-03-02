@@ -34,4 +34,13 @@ public class Message {
     public Date getDate() {return date;}
 
     public void setDate(Date date) {this.date = date;}
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", value='" + value + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }
