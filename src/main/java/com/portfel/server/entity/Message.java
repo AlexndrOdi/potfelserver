@@ -18,6 +18,7 @@ public class Message {
     private String value;
 
     @Column(name = "date",nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     public Message() {

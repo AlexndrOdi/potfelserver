@@ -63,7 +63,7 @@ public class DBConfig {
     }
 
     @Bean
-    public PlatformTransactionManager platformTransactionManager(){
+    public PlatformTransactionManager transactionManager(){
         JpaTransactionManager manager= new JpaTransactionManager();
         manager.setEntityManagerFactory(entityManagerFactory().getObject());
 
@@ -71,9 +71,10 @@ public class DBConfig {
     }
 
     private Properties getHibernateProperties() {
-        try {
         Properties properties = new Properties();
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("hibernate.properties");
+
+        try {
         properties.load(inputStream);
 
         return properties;
