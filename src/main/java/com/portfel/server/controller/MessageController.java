@@ -1,43 +1,49 @@
 package com.portfel.server.controller;
 
 import com.portfel.server.entity.Message;
-import com.portfel.server.repository.MessageRepository;
+import com.portfel.server.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
 
-@RestController
-@RequestMapping(value = "/message")
+@Controller
 public class MessageController {
 
     @Autowired
-    private MessageRepository messageRepository;
+    private MessageService messageService;
 
-    @RequestMapping(value = "/get",method = RequestMethod.GET)
+    @RequestMapping(value = "/getString",method = RequestMethod.GET)
     @ResponseBody
     public String getMessage(ModelMap model){
         return "this is a first message";
     }
 
-    @RequestMapping(value = "/geto",method = RequestMethod.GET)
+    @RequestMapping(value = "/messages",method = RequestMethod.GET)
     @ResponseBody
-    public Message getMessage(){
-        List<Message> list = messageRepository.findAll();
-        return createMockMessage();
+    public List<Message> getAllMessages(){
+        return messageService.getAll();
     }
 
-    private Message createMockMessage() {
-        Message message=new Message();
-        message.setId(1);
-        message.setValue("Hi, man! It's mock object!");
-        message.setDate(new Date());
-        return message;
+    @RequestMapping(value = "/message{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public Message getMessageById(@PathVariable long id){
+        return messageService.getById(id);
+    }
+
+    @RequestMapping(value = "/messages",method = RequestMethod.POST)
+    @ResponseBody
+    public Message saveMessage(@RequestBody Message message){
+        return messageService.save(message);
+    }
+
+    @RequestMapping(value = "/messages{id}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteMessage (@PathVariable long id){
+        messageService.delete(id);
     }
 
     /**    not for commit, just test
