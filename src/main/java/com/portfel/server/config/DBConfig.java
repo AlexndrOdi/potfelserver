@@ -17,12 +17,13 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories("com.portfel.server.repository")
 @EnableTransactionManagement
-@ComponentScan("com.portfel.server")
+@ComponentScan(basePackages = "com.portfel.server")
 @PropertySource("classpath:db.properties")
 public class DBConfig {
 
