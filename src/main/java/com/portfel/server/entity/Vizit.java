@@ -4,49 +4,79 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.logging.Logger;
 
 @Entity
 @Table(name = "vizit")
 public class Vizit {
+
+    private static final Logger logger = Logger.getLogger(Vizit.class.getName());
 
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment",strategy = "increment")
     private long id;
 
-    @Column(name = "from_ip", nullable = false)
-    private String fromIP;
+    @Column(name = "visiting")
+    private String visiting;
 
-    @Column(name = "value", nullable = false)
-    private String string;
-
-    @Column(name = "date", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date")
     private Date date;
 
-    public long getId() {return id;}
+    @Column(name = "section")
+    private String section;
 
-    public void setId(long id) {this.id = id;}
+    @Column(name = "count")
+    private int countOfVisiting;
 
-    public String getFromIP() {return fromIP;}
+    public long getId() {
+        return id;
+    }
 
-    public void setFromIP(String fromIP) {this.fromIP = fromIP;}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public String getString() {return string;}
+    public String getVisiting() {
+        return visiting;
+    }
 
-    public void setString(String string) {this.string = string;}
+    public void setVisiting(String visiting) {
+        this.visiting = visiting;
+    }
 
-    public Date getDate() {return date;}
+    public Date getDate() {
+        return date;
+    }
 
-    public void setDate(Date date) {this.date = date;}
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+    public int getCountOfVisiting() {
+        return countOfVisiting;
+    }
+
+    public void setCountOfVisiting(int countOfVisiting) {
+        this.countOfVisiting = countOfVisiting;
+    }
 
     @Override
     public String toString() {
         return "Vizit{" +
                 "id=" + id +
-                ", fromIP=" + fromIP +
-                ", string='" + string + '\'' +
+                ", visiting='" + visiting + '\'' +
                 ", date=" + date +
+                ", section='" + section + '\'' +
+                ", countOfVisiting=" + countOfVisiting +
                 '}';
     }
 }

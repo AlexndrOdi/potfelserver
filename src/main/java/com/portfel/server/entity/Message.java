@@ -4,10 +4,13 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.logging.Logger;
 
 @Entity
 @Table(name = "message")
 public class Message {
+
+    private static final Logger logger = Logger.getLogger(Message.class.getName());
 
     @Id
     @GeneratedValue(generator = "increment")
