@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Mariya Bitts</title>
+	<!--Подключааем Google Fonts для лого Mariya Bitts-->
+	<!-- <link href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet"> -->
+	<link href="https://fonts.googleapis.com/css?family=Neucha|Rouge+Script&amp;subset=cyrillic" rel="stylesheet">
+	<!--Подключаем библтотеку jQuery-->
+	<script src="/resources/jquery/jquery-3.3.1.js"></script>
+	<!--Подключаем библиотеки js и css от Bootstrap-->
+	<script src="/resources/bootstrap/js/bootstrap.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.css">
+	<!--Подключаем пользовательские стили-->
+	<link rel="stylesheet" type="text/css" href="/resources/css/gallery.css">
+
+    <script type="text/javascript">
+        var ws;
+
+        function init() {
+            ws = new WebSocket("ws://localhost:8080/page/get");
+            ws.onopen = function (event) {
+
+            }
+            ws.onmessage = function (event) {
+                var $textarea = document.getElementById("messages");
+                $textarea.value = $textarea.value + event.data + "\n";
+            }
+            ws.onclose = function (event) {
+
+            }
+        };
+
+        function sendMessage() {
+            var messageField = document.getElementById("message");
+            var userNameField = document.getElementById("username");
+            var message = userNameField.value + ":" + messageField.value;
+            ws.send(message);
+            messageField.value = '';
+        }
+    </script>
+
+</head>
+<body>
+<!--Header-->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!--Лого и гамбургер для адаптации под различные экраны-->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Mariya Bitts</a>
+    </div>
+    <!--Ссылки кнопки-->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav warring">
+        <li><a href="#">Съемка в студии</a></li>
+        <li><a href="#">Love Story</a></li>
+        <li><a href="#">"В ожидании чуда"</a></li>
+        <li><a href="#">Семейная съемка</a></li>
+        <li><a href="#" class="special">Фотопрогулка</a></li>
+        </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Я в соцсетях</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="chatbox">
+    <textarea id="messages" rows="20" cols="50" readonly="readonly"></textarea>
+</div>
+
+<form onload="init()" name="message" action="">
+    <input name="usermsg" type="text" id="message" size="40"/>
+    <input type="button" name="submitmsg" value="Send.." onclick="sendMessage()"/>
+</form>
+<!-- <div class="container">
+	<div class="jumbotron">
+     <h3>Добро пожаловать на мой сайт!</h3>
+		 <p>Здеь скоро будет информация обо мне</p>
+	</div>  
+</div> -->
+</body>
+</html>
+

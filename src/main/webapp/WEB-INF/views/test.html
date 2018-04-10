@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>test page</title>
+</head>
+<body>
+<h2>message from be</h2>
+<p>Get your greating <a href="http://localhost:8080/page/great">here</a></p>
+
+<form method="get" action="/page/get" enctype="text/plain" target="_self">
+
+    <input name="name" type="text">
+    <input type="submit" value="Отправить">
+    <button type="submit" name="action" value="more">
+        Все равно отпавить
+    </button>
+
+</form>
+
+<img src="/image?id=1" height="120" width="200">
+<img src="/image?id=2" height="120" width="200">
+<img src="/image?id=2" height="120" width="200">
+<img src="/image?id=1" height="120" width="200">
+<img src="/image?id=2" height="120" width="200">
+<img src="/image?id=1" height="120" width="200">
+<img src="/image?id=1" height="120" width="200">
+<img src="/image?id=1" height="120" width="200">
+<img src="/image?id=3" height="120" width="200">
+<img src="/image?id=1" height="120" width="200">
+<img src="/image?id=0" height="120" width="200">
+
+<form method="post" action="/page/post" enctype="text/plain" target="_self">
+
+    <input name="namePost" type="text">
+    <input type="submit" value="Send..">
+    <button type="submit" name="action" value="more">
+        Send, I says..
+    </button>
+    <output>${name}</output>
+
+</form>
+
+</body>
+</html>
