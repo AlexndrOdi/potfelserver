@@ -1,6 +1,6 @@
 package com.portfel.server.exception;
 
-public class ObjectNotFoundException extends RuntimeException {
+public class ObjectNotFoundException extends RuntimeException  {
 
     public ObjectNotFoundException() {
     }
