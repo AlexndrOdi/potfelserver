@@ -1,6 +1,8 @@
 package com.portfel.server.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +27,8 @@ import java.util.Properties;
 @ComponentScan(basePackages = "com.portfel.server")
 @PropertySource("classpath:db.properties")
 public class DBConfig {
+
+    private static final Logger logger = LogManager.getLogger(DBConfig.class.getName());
 
     @Resource
     private Environment environment;
@@ -52,7 +56,7 @@ public class DBConfig {
         dataSource.setPassword(environment.getRequiredProperty("db.password"));
 
         dataSource.setInitialSize(Integer.valueOf(environment.getRequiredProperty("db.initialSize")));
-        dataSource.setMinIdle(Integer.valueOf(environment.getRequiredProperty("db.midIdle")));
+        dataSource.setMinIdle(Integer.valueOf(environment.getRequiredProperty("db.minIdle")));
         dataSource.setMaxIdle(Integer.valueOf(environment.getRequiredProperty("db.maxIdle")));
         dataSource.setTimeBetweenEvictionRunsMillis(Long.valueOf(environment.getRequiredProperty("db.timeBetweenEvictionRunsMillis")));
         dataSource.setMinEvictableIdleTimeMillis(Long.valueOf(environment.getRequiredProperty("db.minEvictableIdleTimeMillis")));
@@ -79,6 +83,7 @@ public class DBConfig {
 
         return properties;
         } catch (IOException e) {
+            logger.error(e.getMessage()+"--> Can't find 'hibernate.properties in classpath!'");
             throw new IllegalArgumentException("Can't find 'hibernate.properties in classpath!'", e);
         }
     }

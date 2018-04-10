@@ -1,16 +1,26 @@
 package com.portfel.server.entity;
 
-import org.springframework.security.core.userdetails.User;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
+@Table(name = "roles")
 public class Role {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
+
+    public Role(){
+    }
 
     public long getId() {
         return id;

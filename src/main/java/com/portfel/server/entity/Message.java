@@ -13,8 +13,7 @@ public class Message {
     private static final Logger logger = Logger.getLogger(Message.class.getName());
 
     @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment",strategy = "increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "value",nullable = false)
